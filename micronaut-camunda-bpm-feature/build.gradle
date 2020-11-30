@@ -21,9 +21,10 @@ micronaut {
 }
 
 dependencies {
+    api platform("org.camunda.bpm:camunda-bom:$camundaVersion")
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut:micronaut-runtime")
-    api("org.camunda.bpm:camunda-engine:$camundaVersion")
+    api("org.camunda.bpm:camunda-engine")
 
     compileOnly("io.micronaut.servlet:micronaut-servlet-engine")
     compileOnly("io.micronaut:micronaut-http-server-netty")

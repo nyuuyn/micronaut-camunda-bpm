@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_0n15dpt" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.1.1">
+  <decision id="Decision_1tioo55" name="Decision1">
+    <decisionTable id="DecisionTable_0k8a99g">
+      <input id="Input_1">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>xyz</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" typeRef="string" />
+      <rule id="DecisionRule_0zrqzdf">
+        <inputEntry id="UnaryTests_07ko6xj">
+          <text>"A"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1yis3x7">
+          <text>"B"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1tioo55">
+        <dc:Bounds height="80" width="180" x="100" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

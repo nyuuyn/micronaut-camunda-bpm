@@ -16,6 +16,7 @@ micronaut {
 
 dependencies {
     testImplementation(project(":micronaut-camunda-bpm-feature"))
+    //testImplementation(project(":micronaut-camunda-bpm-feature").sourceSets.test.output)
     testRuntimeOnly("com.h2database:h2")
     testRuntimeOnly("ch.qos.logback:logback-classic")
 

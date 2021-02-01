@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test
  * @author Tobias Schäfer
  */
 @MicronautTest
+//open
 class MnTelemetryRegistryTest {
 
     @Inject

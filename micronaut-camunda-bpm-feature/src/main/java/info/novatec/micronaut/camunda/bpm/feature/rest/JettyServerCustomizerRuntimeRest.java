@@ -30,9 +30,9 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 import java.util.EnumSet;
 
 import static info.novatec.micronaut.camunda.bpm.feature.Configuration.Rest.DEFAULT_AUTHENTICATION_PROVIDER;

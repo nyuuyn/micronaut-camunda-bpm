@@ -17,8 +17,8 @@ package info.novatec.micronaut.camunda.bpm.feature.webapp;
 
 import org.camunda.bpm.webapp.impl.security.filter.SecurityFilter;
 
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
 
 /**
  * This filter extends the Camunda SecurityFilter to manually set the correct context path.

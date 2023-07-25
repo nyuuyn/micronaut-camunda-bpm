@@ -42,7 +42,7 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.*;
+import jakarta.servlet.*;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;

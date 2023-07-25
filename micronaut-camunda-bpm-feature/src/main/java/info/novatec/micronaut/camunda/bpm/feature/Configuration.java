@@ -21,7 +21,7 @@ import io.micronaut.core.bind.annotation.Bindable;
 import io.micronaut.core.convert.format.MapFormat;
 import io.micronaut.core.naming.conventions.StringConvention;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;

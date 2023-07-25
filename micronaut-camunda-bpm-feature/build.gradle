@@ -10,7 +10,7 @@ plugins {
 
 group = "info.novatec"
 
-micronaut {
+micronaut { 
     testRuntime("junit5")
     processing {
         incremental(true)
@@ -47,10 +47,12 @@ dependencies {
 
     // REST API + Webapps
     implementation("com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider")
-    implementation("org.camunda.bpm.webapp:camunda-webapp-webjar:$camundaVersion")
+    //implementation("org.camunda.bpm.webapp:camunda-webapp-webjar:$camundaVersion")
+    implementation("org.camunda.bpm.webapp:camunda-webapp-jakarta:$camundaVersion:classes")
     implementation("org.glassfish.jersey.inject:jersey-hk2:$jerseyVersion")
     implementation("org.glassfish.jersey.containers:jersey-container-servlet-core:$jerseyVersion")
     implementation("org.glassfish.jersey.containers:jersey-container-servlet:$jerseyVersion")
+
 
     // Dependencies for Jetty
     implementation("org.eclipse.jetty:jetty-server:$jettyVersion")

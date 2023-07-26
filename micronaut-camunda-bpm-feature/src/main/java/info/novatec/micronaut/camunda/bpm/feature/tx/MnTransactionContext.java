@@ -17,7 +17,9 @@ package info.novatec.micronaut.camunda.bpm.feature.tx;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.transaction.SynchronousTransactionManager;
+import io.micronaut.transaction.TransactionOperations;
 import io.micronaut.transaction.support.TransactionSynchronization;
+import jakarta.inject.Inject;
 import org.camunda.bpm.engine.impl.cfg.TransactionContext;
 import org.camunda.bpm.engine.impl.cfg.TransactionListener;
 import org.camunda.bpm.engine.impl.cfg.TransactionState;
@@ -39,33 +41,37 @@ public class MnTransactionContext implements TransactionContext {
     protected final CommandContext commandContext;
     protected TransactionState lastTransactionState = null;
 
+    @Inject
+    TransactionOperations<?> transactionOperations;
+
     public MnTransactionContext(CommandContext commandContext, SynchronousTransactionManager<Connection> transactionManager) {
         this.commandContext = commandContext;
         this.transactionManager = transactionManager;
 
-
-        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
-            @Override
-            public void beforeCommit(boolean readOnly) {
-                lastTransactionState = COMMITTING;
-            }
-
-            @Override
-            public void afterCommit() {
-                lastTransactionState = COMMITTED;
-            }
-
-            @Override
-            public void beforeCompletion() {
-                lastTransactionState = ROLLINGBACK;
-            }
-
-            @Override
-            public void afterCompletion(@NonNull Status status) {
-                if (Status.ROLLED_BACK == status) {
-                    lastTransactionState = ROLLED_BACK;
+        this.transactionOperations.findTransactionStatus().ifPresent(txStatus -> {
+            txStatus.registerSynchronization(new TransactionSynchronization() {
+                @Override
+                public void beforeCommit(boolean readOnly) {
+                    lastTransactionState = COMMITTING;
                 }
-            }
+
+                @Override
+                public void afterCommit() {
+                    lastTransactionState = COMMITTED;
+                }
+
+                @Override
+                public void beforeCompletion() {
+                    lastTransactionState = ROLLINGBACK;
+                }
+
+                @Override
+                public void afterCompletion(@NonNull Status status) {
+                    if (Status.ROLLED_BACK == status) {
+                        lastTransactionState = ROLLED_BACK;
+                    }
+                }
+            });
         });
     }
 
@@ -122,12 +128,12 @@ public class MnTransactionContext implements TransactionContext {
             default:
                 throw new IllegalStateException("Unknown transaction state: " + transactionState);
         }
-        TransactionSynchronizationManager.registerSynchronization(transactionSynchronization);
+        this.transactionOperations.findTransactionStatus().ifPresent(txStatus -> txStatus.registerSynchronization(transactionSynchronization));
     }
 
     @Override
     public boolean isTransactionActive() {
-        return TransactionSynchronizationManager.isActualTransactionActive()
+        return this.transactionOperations.findTransactionStatus().isPresent()
                 && ROLLED_BACK != lastTransactionState
                 && ROLLINGBACK != lastTransactionState;
     }
